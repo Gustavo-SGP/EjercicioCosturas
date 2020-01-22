@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Sistema de ventas - Costuras Ximena</title>
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="dist/css/style.min.css" rel="stylesheet">
+
+    <!-- DEPENDENCIAS ALERTAS -->
+    <script src="dist/js/alertify.js"></script>
+    <link rel="stylesheet" href="dist/css/alertify.min.css" />
+    <link rel="stylesheet" href="dist/css/default.min.css" />
+    <!-- FIN DEPENDENCIAS ALERTAS -->
+</head>
+
+<body>
+    <div id="usuarios">
+            <div class="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title m-b-0 text-center">Cuentas de Usuario
+                                        <a v-on:click="limpiar()" style="cursor:pointer" data-toggle="modal"
+                                            data-target="#modal_añadir_usuario">
+                                            <i class="fas fa-user-plus float-right"></i>
+                                        </a>
+                                    </h3>
+                                </div>
+                                <!-- FILTRO DE BUSQUEDA -->
+                                <div
+                                    class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                                    <div
+                                        class="form-group col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-3 col-md-offset-9 col-lg-3 col-lg-offset-9">
+                                        <br>
+                                        <input type="text" class="form-control" id="filtro_busqueda"
+                                            placeholder="Buscar" autocomplete="off">
+                                    </div>
+                                </div>
+                                <!-- FIN FILTRO DE BUSQUEDA -->
+
+                                <!-- TABLA PRINCIPAL -->
+                                <table class="table" id="tabla_principal">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <!-- <th scope="col">#</th> -->
+                                            <th scope="col">Rol</th>
+                                            <th scope="col">Nombres</th>
+                                            <th scope="col">Apellidos</th>
+                                            <th scope="col">Administrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="dUsuario in datosTabla" class="text-center">
+                                            <!-- <th scope="row" class="text-center"></th> -->
+                                            <th>{{dUsuario.rol}}</th>
+                                            <th>{{dUsuario.nombres}}</th>
+                                            <th>{{dUsuario.apellidos}}</th>
+                                            <th class="text-center">
+                                                <a style="cursor:pointer" data-toggle="modal"
+                                                    data-target="#modal_ver_usuario"
+                                                    ></a>
+                                                    <i style="cursor:pointer" class="fas fa-eye fa-lg"></i>
+                                                </a>
+                                                <a style="cursor:pointer" data-toggle="modal"
+                                                    data-target="#modal_editar_usuario"
+                                                    >
+                                                    <i style="cursor:pointer" class="fas fa-edit fa-lg"></i>
+                                                </a>
+                                                <i style="cursor:pointer" v-on:click="eliminarUsuario(d_usuario.id)"
+                                                    class="fas fa-trash-alt fa-lg"></i>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- FIN TABLA PRINCIPAL -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODAL AÑADIR USUARIO -->
+                <div class="modal fade" id="modal_añadir_usuario" tabindex="-1" data-keyboard="false" role="dialog"
+                    aria-labelledby="modal_añadir_usuario" data-backdrop="static">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Añadir nuevo usuario</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- CONTENIDO MODAL AÑADIR USUARIO -->
+                            <form  class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+
+                                            <label class="col-md-3" for="añadir_rol_usuario">Rol</label>
+                                            <div class="col-md-9">
+                                                <select  id="añadir_rol_usuario" required
+                                                    class="select2 custom-select"
+                                                    style="width: 100%; height:36px;">
+                                                    <option value="asd" selected disabled hidden>Choose here</option>
+                                                    <option>Administrador/a</option>
+                                                    <option>Vendedor/a</option>
+                                                    <option>Cliente</option>
+                                                </select><br><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_rut_usuario">Rut</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="añadir_rut_usuario"
+                                                    class="form-control" autocomplete="off" placeholder="Rut"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_nombre_usuario">Nombres</label>
+                                            <div class="col-md-9">
+                                                <input type="text"
+                                                    id="añadir_nombre_usuario" class="form-control" autocomplete="off"
+                                                    required placeholder="María Ximena"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_apellido_usuario">Apellidos</label>
+                                            <div class="col-md-9">
+                                                <input type="text"
+                                                    id="añadir_apellido_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="Campos Bravo" required><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_email_usuario">Email</label>
+                                            <div class="col-md-9">
+                                                <input required type="email"
+                                                    id="añadir_email_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="mxcb_71@hotmail.com"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_telefono_usuario">Teléfono</label>
+                                            <div class="col-md-9">
+                                                <input type="number"
+                                                    id="añadir_telefono_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="994685717" required><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_pass_usuario">Contraseña</label>
+                                            <div class="col-md-9">
+                                                <input type="pass" id="añadir_pass_usuario"
+                                                    class="form-control" autocomplete="off" placeholder="**********"
+                                                    required><br>
+                                            </div>
+                                            <label class="col-md-3" for="añadir_pass2_usuario">Repetir contraseña</label>
+                                            <div class="col-md-9">
+                                                <input type="pass" id="añadir_pass2_usuario"
+                                                    class="form-control" autocomplete="off" placeholder="**********"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body float-right">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="button" data-dismiss="modal"
+                                            class="btn btn-danger">Cancelar</button>
+                                    </div>
+                                </div>
+                        </div>
+                        </form>
+                        <!-- FIN CONTENIDO MODAL AÑADIR USUARIO -->
+                    </div>
+                </div>
+                <!-- FIN MODAL AÑADIR USUARIO -->
+
+                <!-- MODAL VER USUARIO -->
+                <div class="modal fade" id="modal_ver_usuario" tabindex="-1" data-keyboard="false" role="dialog"
+                    aria-labelledby="modal_ver_usuario" data-backdrop="static">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Información del usuario</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- CONTENIDO MODAL VER USUARIO -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+
+                                        <label class="col-md-3" for="ver_rol_usuario">Rol</label>
+                                        <div class="col-md-9">
+                                            <input readonly type="text" id="ver_rol_usuario"
+                                                class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_rut_usuario">Rut</label>
+                                        <div class="col-md-9">
+                                            <input readonly type="text" id="ver_rut_usuario"
+                                                class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_nombre_usuario">Nombres</label>
+                                        <div class="col-md-9">
+                                            <input readonly type="text"
+                                                id="ver_nombre_usuario" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_apellido_usuario">Apellidos</label>
+                                        <div class="col-md-9">
+                                            <input readonly type="text"
+                                                id="ver_apellido_usuario" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_email_usuario">Email</label>
+                                        <div class="col-md-9">
+                                            <input readonly type="email"
+                                                id="ver_email_usuario" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_telefono_usuario">Teléfono</label>
+                                        <div class="col-md-9">
+                                            <input readonly type="number"
+                                                id="ver_telefono_usuario" class="form-control"><br>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="border-top">
+                                <div class="card-body float-right">
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FIN CONTENIDO MODAL VER USUARIO -->
+                    </div>
+                </div>
+                <!-- FIN MODAL VER USUARIO -->
+
+                <!-- MODAL EDITAR USUARIO -->
+                <div class="modal fade" id="modal_editar_usuario" tabindex="-1" data-keyboard="false" role="dialog"
+                    aria-labelledby="modal_editar_usuario" data-backdrop="static">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar Información del usuario</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- CONTENIDO MODAL EDITAR USUARIO -->
+                            <form class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+
+                                            <label class="col-md-3" for="editar_rol_usuario">Rol</label>
+                                            <div class="col-md-9">
+                                                <select id="editar_rol_usuario" 
+                                                    class="select2 form-control custom-select"
+                                                    style="width: 100%; height:36px;">
+                                                    <option>Seleccionar</option>
+                                                    <option>Administrador</option>
+                                                    <option>Vendedor</option>
+
+                                                </select><br><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_rut_usuario">Rut</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="editar_rut_usuario"
+                                                    class="form-control" autocomplete="off"
+                                                    placeholder="11.898.720-9"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_nombre_usuario">Nombres</label>
+                                            <div class="col-md-9">
+                                                <input required type="text"
+                                                    id="editar_nombre_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="María Ximena"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_apellido_usuario">Apellidos</label>
+                                            <div class="col-md-9">
+                                                <input required type="text"
+                                                    id="editar_apellido_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="Campos Bravo"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_email_usuario">Email</label>
+                                            <div class="col-md-9">
+                                                <input required type="email"
+                                                    id="editar_email_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="mxcb_71@hotmail.com"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_telefono_usuario">Teléfono</label>
+                                            <div class="col-md-9">
+                                                <input required type="number"
+                                                    id="editar_telefono_usuario" class="form-control" autocomplete="off"
+                                                    placeholder="994685717"><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_pass_usuario">Contraseña</label>
+                                            <div class="col-md-9">
+                                                <input type="password" id="editar_pass_usuario"
+                                                    class="form-control" autocomplete="off" placeholder="Contraseña">
+                                            </div>
+
+                                            <label class="col-md-3" for="editar_pass2_usuario">Repetir contraseña</label>
+                                            <div class="col-md-9">
+                                                <input type="password" id="editar_pass2_usuario"
+                                                    class="form-control" autocomplete="off"
+                                                    placeholder="Repetir contraseña">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body float-right">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="button" data-dismiss="modal"
+                                            class="btn btn-danger">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- FIN CONTENIDO MODAL EDITAR USUARIO -->
+                    </div>
+                </div>
+                <!-- FIN MODAL EDITAR USUARIO -->
+            </div>
+        </div>
+    </div>
+    <!-- DEPENDENCIAS JS -->
+    <script src="https://kit.fontawesome.com/c9ffd6ca07.js" crossorigin="anonymous"></script>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="dist/js/sidebarmenu.js"></script>
+    <script src="dist/js/custom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    
+    <script src="./dist/js/usuarios.js"></script>
+    <script src="./dist/js/filtro_busqueda.js"></script>
+    <!-- FIN DEPENDENCIAS JS -->
+</body>
+
+</html>

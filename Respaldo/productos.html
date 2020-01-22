@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Sistema de ventas - Costuras Ximena</title>
+    <!-- Custom CSS -->
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="dist/css/style.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c9ffd6ca07.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="productos">
+
+
+
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+            <!-- ============================================================== -->
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            <header class="topbar" data-navbarbg="skin5">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header" data-logobg="skin5">
+                        <!-- This is for the sidebar toggle which is visible on mobile only -->
+                        <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                                class="ti-menu ti-close"></i></a>
+                        <!-- ============================================================== -->
+                        <!-- Logo -->
+                        <!-- ============================================================== -->
+                        <a class="navbar-brand" href="index.html">
+                            <!-- Logo icon -->
+                            <b class="logo-icon p-l-10">
+                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                <!-- Dark Logo icon -->
+                                <img src="assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <span class="logo-text">
+                                <!-- dark Logo text -->
+                                <img src="assets/images/logo.png" alt="homepage" class="light-logo" />
+
+                            </span>
+                        </a>
+                        <!-- ============================================================== -->
+                        <!-- End Logo -->
+                        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+                        <!-- Toggle which is visible on mobile only -->
+                        <!-- ============================================================== -->
+                        <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+                            data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                            aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                        <!-- ============================================================== -->
+                        <!-- toggle and nav items -->
+                        <!-- ============================================================== -->
+                        <ul class="navbar-nav float-left mr-auto">
+                            <li class="nav-item d-none d-md-block"><a
+                                    class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"
+                                    data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                            <!-- ============================================================== -->
+                        </ul>
+                        <!-- ============================================================== -->
+                        <!-- Right side toggle and nav items -->
+                        <!-- ============================================================== -->
+                        <ul class="navbar-nav float-right">
+                            <!-- ============================================================== -->
+                            <!-- User profile and search -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                        src="assets/images/users/1.jpg" alt="user" class="rounded-circle"
+                                        width="31"></a>
+                                <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                    <a class="dropdown-item" href="javascript:void(0)"><i
+                                            class="ti-user m-r-5 m-l-5"></i>
+                                        Mi Perfil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:void(0)"><i
+                                            class="ti-settings m-r-5 m-l-5"></i> Configuración de la cuenta</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:void(0)"><i
+                                            class="fa fa-power-off m-r-5 m-l-5"></i> Cerrar Sesión</a>
+                                </div>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- User profile and search -->
+                            <!-- ============================================================== -->
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <aside class="left-sidebar" data-sidebarbg="skin5">
+                <!-- Sidebar scroll-->
+                <div class="scroll-sidebar">
+                    <!-- Sidebar navigation-->
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav" class="p-t-30">
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                        class="hide-menu">Menú Principal</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i
+                                        class="fas fa-shopping-cart"></i><span class="hide-menu">Ventas</span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="nueva_venta.html" class="sidebar-link"><i
+                                                class="fas fa-cart-plus"></i><span class="hide-menu"> Nueva venta
+                                            </span></a></li>
+                                    <li class="sidebar-item"><a href="seguimiento_ventas.html" class="sidebar-link"><i
+                                                class="fas fa-eye"></i><span class="hide-menu"> Seguimiento </span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="clientes.html" aria-expanded="false"><i class="fa fa-users"></i><span
+                                        class="hide-menu">Clientes</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="productos.html" aria-expanded="false"><i class="fas fa-tshirt"></i><span
+                                        class="hide-menu">Productos</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="insumos.html" aria-expanded="false"><i class="fa fa-boxes"></i><span
+                                        class="hide-menu">Insumos</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="costos.html" aria-expanded="false"><i class="fas fa-dollar-sign"></i><span
+                                        class="hide-menu">Costos</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="proveedores.html" aria-expanded="false"><i class="fas fa-user-tag"></i><span
+                                        class="hide-menu">Proveedores</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="usuarios.html" aria-expanded="false"><i class="fas fa-user-shield"></i><span
+                                        class="hide-menu">Usuarios</span></a></li>
+                        </ul>
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </aside>
+
+            <div class="page-wrapper">
+                <div class="container-fluid">
+                    <!-- ============================================================== -->
+                    <!-- Start Page Content -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title m-b-0 text-center">Productos
+                                        <!-- <a style="cursor:pointer" data-toggle="modal"
+                                            data-target="#modal_añadir_producto">
+                                            <i class="fas fa-plus-circle float-right"></i>
+                                        </a> -->
+                                    </h3>
+                                </div>
+                                <!-- FILTRO DE BUSQUEDA -->
+                                <div
+                                    class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                                    <div
+                                        class="form-group col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-3 col-md-offset-9 col-lg-3 col-lg-offset-9">
+                                        <br>
+                                        <input type="text" class="form-control" id="filtro_busqueda"
+                                            placeholder="Buscar" autocomplete="off">
+                                    </div>
+                                </div>
+                                <!-- FIN FILTRO DE BUSQUEDA -->
+                                <table class="table" id="tabla_principal">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th scope="col">Código</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Talla</th>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Administrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(d_tabla, index) in datos_tabla" class="text-center">
+                                            <th scope="row">{{index+1}}</th>
+                                            <th scope="row">{{d_tabla.CODIGO}}</th>
+                                            <th>{{d_tabla.NOMBRE_PRODUCTO}}</th>
+                                            <th>{{d_tabla.TALLA_PRODUCTO}}</th>
+                                            <th>{{d_tabla.CANTIDAD_PRODUCTO}}</th>
+                                            <th>{{d_tabla.VALOR_PRODUCTO}}</th>
+                                            <th class="text-center">
+                                                <a style="cursor:pointer" data-toggle="modal"
+                                                    data-target="#modal_ver_producto"
+                                                    v-on:click="verProducto(d_tabla.id)">
+                                                    <i style="cursor:pointer" class="fas fa-eye fa-lg"></i>
+                                                </a>
+                                                <a style="cursor:pointer" data-toggle="modal"
+                                                    data-target="#modal_editar_producto"
+                                                    v-on:click="verProducto(d_tabla.id)">
+                                                    <i style="cursor:pointer" class="fas fa-edit fa-lg"></i>
+                                                </a>
+                                                <i style="cursor:pointer"
+                                                    v-on:click="verProducto(d_tabla.id)"
+                                                    class="fas fa-trash-alt fa-lg"></i>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODAL AÑADIR PRODUCTO -->
+                <div class="modal fade" id="modal_añadir_producto" tabindex="-1" data-keyboard="false" role="dialog"
+                    aria-labelledby="modal_añadir_producto" data-backdrop="static">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Añadir nuevo producto</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- CONTENIDO MODAL AÑADIR PRODUCTO -->
+                            <form v-on:submit.prevent='nuevoProducto' class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-3" for="añadir_tipo_producto">Tipo producto</label>
+                                            <div class="col-md-9">
+                                                <select required v-model="TIPO_PRODUCTO" class="form-control"
+                                                    id="añadir_tipo_producto">
+                                                    <option disabled value="">Seleccionar</option>
+                                                    <option>Buzo completo</option>
+                                                    <option>Delantal</option>
+                                                    <option>Falda</option>
+                                                    <option>Pantalón de buzo</option>
+                                                    <option>Polera</option>
+                                                    <option>Polerón</option>
+                                                </select><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_sexo_producto">Sexo</label>
+                                            <div class="col-md-9">
+                                                <select required v-model="SEXO_PRODUCTO" class="form-control"
+                                                    id="añadir_sexo_producto">
+                                                    <option disabled value="">Seleccionar</option>
+                                                    <option>Hombre</option>
+                                                    <option>Mujer</option>
+                                                </select><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_tipo_polera">Tipo polera</label>
+                                            <div class="col-md-9">
+                                                <select required v-model="TIPO_POLERA" class="form-control"
+                                                    id="añadir_tipo_polera">
+                                                    <option disabled value="">Seleccionar</option>
+                                                    <option>Manga Corta Pique</option>
+                                                    <option>Manga Corta Polo</option>
+                                                    <option>Manga Larga Pique</option>
+                                                    <option>Manga Larga Polo</option>
+                                                </select><br>
+                                            </div>
+
+                                            <label class="col-md-3" for="añadir_talla_producto">Talla</label>
+                                            <div class="col-md-9">
+                                                <select required v-model="TALLA_PRODUCTO" class="form-control"
+                                                    id="añadir_talla_producto">
+                                                    <option disabled value="">Seleccionar</option>
+                                                    <option>4</option>
+                                                    <option>6</option>
+                                                    <option>8</option>
+                                                    <option>10</option>
+                                                    <option>12</option>
+                                                    <option>14</option>
+                                                    <option>16</option>
+                                                    <option>S</option>
+                                                    <option>M</option>
+                                                    <option>L</option>
+                                                    <option>XL</option>
+                                                </select><br>
+                                            </div>
+
+                                            <label class="col-md-3"
+                                                for="añadir_institucion_producto">Institución</label>
+                                            <div class="col-md-9">
+                                                <select required v-model="INSTITUCION_PRODUCTO" class="form-control"
+                                                    id="añadir_institucion_producto">
+                                                    <option disabled value="">Seleccionar</option>
+                                                    <option>Colegio Pacific School</option>
+                                                    <option>Colegio Santa Inés</option>
+                                                    <option>ETC</option>
+                                                </select><br>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body float-right">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="button" data-dismiss="modal"
+                                            class="btn btn-danger">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- FIN CONTENIDO MODAL AÑADIR PRODUCTO -->
+                        </div>
+                    </div>
+                </div>
+                <!-- FIN MODAL AÑADIR PRODUCTO -->
+
+                <!-- MODAL VER PRODUCTO -->
+                <div class="modal fade" id="modal_ver_producto" tabindex="-1" data-keyboard="false" role="dialog"
+                    aria-labelledby="modal_ver_producto" data-backdrop="static">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Información del producto</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- CONTENIDO MODAL VER PRODUCTO -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-md-3" for="ver_codigo_producto">Código</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.CODIGO" type="number"
+                                                id="ver_codigo_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_tipo_producto">Nombre Producto</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.NOMBRE_PRODUCTO" type="text"
+                                                id="ver_tipo_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_talla_producto">Talla</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.TALLA_PRODUCTO" type="number"
+                                                id="ver_talla_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_institucion_producto">Institución</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.INSTITUCION_PRODUCTO" type="text"
+                                                id="ver_institucion_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_cantidad_producto">Stock</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.CANTIDAD_PRODUCTO" type="number"
+                                                id="ver_cantidad_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="ver_valor_producto">Precio</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.VALOR_PRODUCTO" type="number"
+                                                id="ver_valor_producto" class="form-control"><br>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="border-top">
+                                <div class="card-body float-right">
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FIN CONTENIDO MODAL VER PRODUCTO -->
+                    </div>
+                </div>
+                <!-- FIN MODAL VER PRODUCTO -->
+
+                <!-- MODAL EDITAR PRODUCTO -->
+                <div class="modal fade" id="modal_editar_producto" tabindex="-1" data-keyboard="false" role="dialog"
+                    aria-labelledby="modal_editar_producto" data-backdrop="static">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar Información del producto</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- CONTENIDO MODAL EDITAR PRODUCTO -->
+                            <form v-on:submit.prevent='editarProducto' class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                             <label class="col-md-3" for="editar_codigo_producto">Código</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.CODIGO" type="number"
+                                                id="editar_codigo_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="editar_tipo_producto">Nombre Producto</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.NOMBRE_PRODUCTO" type="text"
+                                                id="editar_tipo_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="editar_talla_producto">Talla</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.TALLA_PRODUCTO" type="number"
+                                                id="editar_talla_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="editar_institucion_producto">Institución</label>
+                                        <div class="col-md-9">
+                                            <input readonly v-model="datos_producto.INSTITUCION_PRODUCTO" type="text"
+                                                id="editar_institucion_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="editar_cantidad_producto">Stock</label>
+                                        <div class="col-md-9">
+                                            <input  v-model="datos_producto.CANTIDAD_PRODUCTO" type="number"
+                                                id="editar_cantidad_producto" class="form-control"><br>
+                                        </div>
+
+                                        <label class="col-md-3" for="editar_valor_producto">Precio</label>
+                                        <div class="col-md-9">
+                                            <input  v-model="datos_producto.VALOR_PRODUCTO" type="number"
+                                                id="editar_valor_producto" class="form-control"><br>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body float-right">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="button" data-dismiss="modal"
+                                            class="btn btn-danger">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- FIN CONTENIDO MODAL EDITAR PRODUCTO -->
+                        </div>
+                    </div>
+                </div>
+                <!-- FIN MODAL EDITAR PRODUCTO -->
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <!--VUE JS Y AXIOS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./dist/js/productos.js"></script>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Menu sidebar -->
+    <script src="dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    <script src="assets/libs/flot/excanvas.js"></script>
+    <script src="assets/libs/flot/jquery.flot.js"></script>
+    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+
+    
+
+    <!--FILTRO DE BUSQUEDA-->
+    <script>
+        document.querySelector("#filtro_busqueda").onkeyup = function () {
+            $TableFilter("#tabla_principal", this.value);
+        }
+
+        $TableFilter = function (id, value) {
+            var rows = document.querySelectorAll(id + ' tbody tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var showRow = false;
+
+                var row = rows[i];
+                row.style.display = 'none';
+
+                for (var x = 0; x < row.childElementCount; x++) {
+                    if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
+                        showRow = true;
+                        break;
+                    }
+                }
+
+                if (showRow) {
+                    row.style.display = null;
+                }
+            }
+        }</script>
+    <!--FILTRO DE BUSQUEDA-->
+</body>
+
+</html>
