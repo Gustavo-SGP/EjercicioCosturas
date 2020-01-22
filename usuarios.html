@@ -29,7 +29,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title m-b-0 text-center">Cuentas de Usuario
-                                        <a v-on:click="limpiar()" style="cursor:pointer" data-toggle="modal"
+                                        <a  style="cursor:pointer" data-toggle="modal"
                                             data-target="#modal_añadir_usuario">
                                             <i class="fas fa-user-plus float-right"></i>
                                         </a>
@@ -67,15 +67,15 @@
                                             <th class="text-center">
                                                 <a style="cursor:pointer" data-toggle="modal"
                                                     data-target="#modal_ver_usuario"
-                                                    ></a>
+                                                    v-on:click="verUsuario(dUsuario.id)">
                                                     <i style="cursor:pointer" class="fas fa-eye fa-lg"></i>
                                                 </a>
                                                 <a style="cursor:pointer" data-toggle="modal"
                                                     data-target="#modal_editar_usuario"
-                                                    >
+                                                    v-on:click="verUsuario(dUsuario.id)">
                                                     <i style="cursor:pointer" class="fas fa-edit fa-lg"></i>
                                                 </a>
-                                                <i style="cursor:pointer" v-on:click="eliminarUsuario(d_usuario.id)"
+                                                <i style="cursor:pointer" v-on:click="eliminarUsuario(dUsuario.id)"
                                                     class="fas fa-trash-alt fa-lg"></i>
                                             </th>
                                         </tr>
@@ -98,14 +98,14 @@
                             </div>
 
                             <!-- CONTENIDO MODAL AÑADIR USUARIO -->
-                            <form  class="col-md-12">
+                            <form v-on:submit.prevent="nuevoUsuario" class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="form-group row">
 
                                             <label class="col-md-3" for="añadir_rol_usuario">Rol</label>
                                             <div class="col-md-9">
-                                                <select  id="añadir_rol_usuario" required
+                                                <select v-model="datosUsuarios.rol" id="añadir_rol_usuario" required
                                                     class="select2 custom-select"
                                                     style="width: 100%; height:36px;">
                                                     <option value="asd" selected disabled hidden>Choose here</option>
@@ -117,47 +117,47 @@
 
                                             <label class="col-md-3" for="añadir_rut_usuario">Rut</label>
                                             <div class="col-md-9">
-                                                <input type="text" id="añadir_rut_usuario"
+                                                <input v-model="datosUsuarios.rut" type="text" id="añadir_rut_usuario"
                                                     class="form-control" autocomplete="off" placeholder="Rut"><br>
                                             </div>
 
                                             <label class="col-md-3" for="añadir_nombre_usuario">Nombres</label>
                                             <div class="col-md-9">
-                                                <input type="text"
+                                                <input v-model="datosUsuarios.nombres" type="text"
                                                     id="añadir_nombre_usuario" class="form-control" autocomplete="off"
                                                     required placeholder="María Ximena"><br>
                                             </div>
 
                                             <label class="col-md-3" for="añadir_apellido_usuario">Apellidos</label>
                                             <div class="col-md-9">
-                                                <input type="text"
+                                                <input type="text" v-model="datosUsuarios.apellidos"
                                                     id="añadir_apellido_usuario" class="form-control" autocomplete="off"
                                                     placeholder="Campos Bravo" required><br>
                                             </div>
 
                                             <label class="col-md-3" for="añadir_email_usuario">Email</label>
                                             <div class="col-md-9">
-                                                <input required type="email"
+                                                <input required type="email" v-model="datosUsuarios.email"
                                                     id="añadir_email_usuario" class="form-control" autocomplete="off"
                                                     placeholder="mxcb_71@hotmail.com"><br>
                                             </div>
 
                                             <label class="col-md-3" for="añadir_telefono_usuario">Teléfono</label>
                                             <div class="col-md-9">
-                                                <input type="number"
+                                                <input type="number" v-model="datosUsuarios.telefono"
                                                     id="añadir_telefono_usuario" class="form-control" autocomplete="off"
                                                     placeholder="994685717" required><br>
                                             </div>
 
                                             <label class="col-md-3" for="añadir_pass_usuario">Contraseña</label>
                                             <div class="col-md-9">
-                                                <input type="pass" id="añadir_pass_usuario"
+                                                <input type="pass" id="añadir_pass_usuario" v-model="datosUsuarios.password"
                                                     class="form-control" autocomplete="off" placeholder="**********"
                                                     required><br>
                                             </div>
                                             <label class="col-md-3" for="añadir_pass2_usuario">Repetir contraseña</label>
                                             <div class="col-md-9">
-                                                <input type="pass" id="añadir_pass2_usuario"
+                                                <input type="pass" id="añadir_pass2_usuario" v-model="datosUsuarios.c_password"
                                                     class="form-control" autocomplete="off" placeholder="**********"
                                                     required>
                                             </div>
@@ -195,37 +195,37 @@
 
                                         <label class="col-md-3" for="ver_rol_usuario">Rol</label>
                                         <div class="col-md-9">
-                                            <input readonly type="text" id="ver_rol_usuario"
+                                            <input v-model="datosUsuarios.rol" readonly type="text" id="ver_rol_usuario"
                                                 class="form-control"><br>
                                         </div>
 
                                         <label class="col-md-3" for="ver_rut_usuario">Rut</label>
                                         <div class="col-md-9">
-                                            <input readonly type="text" id="ver_rut_usuario"
+                                            <input v-model="datosUsuarios.rut" readonly type="text" id="ver_rut_usuario"
                                                 class="form-control"><br>
                                         </div>
 
                                         <label class="col-md-3" for="ver_nombre_usuario">Nombres</label>
                                         <div class="col-md-9">
-                                            <input readonly type="text"
+                                            <input readonly type="text" v-model="datosUsuarios.nombres"
                                                 id="ver_nombre_usuario" class="form-control"><br>
                                         </div>
 
                                         <label class="col-md-3" for="ver_apellido_usuario">Apellidos</label>
                                         <div class="col-md-9">
-                                            <input readonly type="text"
+                                            <input readonly type="text" v-model="datosUsuarios.apellidos"
                                                 id="ver_apellido_usuario" class="form-control"><br>
                                         </div>
 
                                         <label class="col-md-3" for="ver_email_usuario">Email</label>
                                         <div class="col-md-9">
-                                            <input readonly type="email"
+                                            <input readonly type="email" v-model="datosUsuarios.email"
                                                 id="ver_email_usuario" class="form-control"><br>
                                         </div>
 
                                         <label class="col-md-3" for="ver_telefono_usuario">Teléfono</label>
                                         <div class="col-md-9">
-                                            <input readonly type="number"
+                                            <input readonly type="number" v-model="datosUsuarios.telefono"
                                                 id="ver_telefono_usuario" class="form-control"><br>
                                         </div>
                                     </div>
@@ -254,7 +254,7 @@
                             </div>
 
                             <!-- CONTENIDO MODAL EDITAR USUARIO -->
-                            <form class="col-md-12">
+                            <form v-on:submit.prevent="editarUsuario" class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="form-group row">
@@ -273,7 +273,7 @@
 
                                             <label class="col-md-3" for="editar_rut_usuario">Rut</label>
                                             <div class="col-md-9">
-                                                <input type="text" id="editar_rut_usuario"
+                                                <input type="text" id="editar_rut_usuario" v-model="datosUsuarios.rut"
                                                     class="form-control" autocomplete="off"
                                                     placeholder="11.898.720-9"><br>
                                             </div>
@@ -282,39 +282,39 @@
                                             <div class="col-md-9">
                                                 <input required type="text"
                                                     id="editar_nombre_usuario" class="form-control" autocomplete="off"
-                                                    placeholder="María Ximena"><br>
+                                                    placeholder="María Ximena" v-model="datosUsuarios.nombres"><br>
                                             </div>
 
                                             <label class="col-md-3" for="editar_apellido_usuario">Apellidos</label>
                                             <div class="col-md-9">
                                                 <input required type="text"
                                                     id="editar_apellido_usuario" class="form-control" autocomplete="off"
-                                                    placeholder="Campos Bravo"><br>
+                                                    placeholder="Campos Bravo" v-model="datosUsuarios.apellidos" ><br>
                                             </div>
 
                                             <label class="col-md-3" for="editar_email_usuario">Email</label>
                                             <div class="col-md-9">
                                                 <input required type="email"
                                                     id="editar_email_usuario" class="form-control" autocomplete="off"
-                                                    placeholder="mxcb_71@hotmail.com"><br>
+                                                    placeholder="mxcb_71@hotmail.com" v-model="datosUsuarios.email"><br>
                                             </div>
 
                                             <label class="col-md-3" for="editar_telefono_usuario">Teléfono</label>
                                             <div class="col-md-9">
                                                 <input required type="number"
-                                                    id="editar_telefono_usuario" class="form-control" autocomplete="off"
+                                                    id="editar_telefono_usuario" v-model="datosUsuarios.telefono" class="form-control" autocomplete="off"
                                                     placeholder="994685717"><br>
                                             </div>
 
                                             <label class="col-md-3" for="editar_pass_usuario">Contraseña</label>
                                             <div class="col-md-9">
-                                                <input type="password" id="editar_pass_usuario"
+                                                <input type="password" id="editar_pass_usuario" v-model="datosUsuarios.password"
                                                     class="form-control" autocomplete="off" placeholder="Contraseña">
                                             </div>
 
                                             <label class="col-md-3" for="editar_pass2_usuario">Repetir contraseña</label>
                                             <div class="col-md-9">
-                                                <input type="password" id="editar_pass2_usuario"
+                                                <input type="password" id="editar_pass2_usuario" v-model="datosUsuarios.c_password"
                                                     class="form-control" autocomplete="off"
                                                     placeholder="Repetir contraseña">
                                             </div>
